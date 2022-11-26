@@ -1,71 +1,92 @@
-let db, notes, tx, store, note;
-const dbReq = indexedDB.open('personal', 1);
 
-dbReq.onupgradeneeded = (event) => {
-    db = event.target.result;
-    let notes = db.createObjectStore('notes', {autoIncrement: true})
-}
-dbReq.onsuccess = (event) => {
-    db = event.target.result
-}
-dbReq.onerror = function(event) {
-    alert('ERRRROR')
-}
+window.onload = () => {
+    document.querySelector('.game_name').classList.remove('hidden-h1');
+    document.querySelector('.tree').classList.remove('hidden');
+    document.querySelector('.facts').classList.remove('hidden');
 
-const addStickyNote = (db, first, last, age) => {
-    let tx = db.transaction(["notes"], "readwrite")
-    let store = tx.objectStore('notes')
+} 
 
-    let note = {Name: first, Fimil: last,Age :age, timestamp: Date.now()}
-    store.add(note);
+const DragAndDrop = () => {
+    const cards = document.querySelectorAll('.fact')
+    const cells = document.querySelectorAll('.add')
+    let count = 0
 
-    tx.onsuccess = () => {
-        console.log('stored note!')
+    const dragStart = function(event) {
+        setTimeout(() => {
+            this.classList.add('hide')
+        }, 0)
+        console.log('Start', this)
+        event.dataTransfer.setData("dragItem", this.dataset.item)
+
+        this.classList.remove('green')
+        this.classList.remove('red')
     }
-    tx.onerror = (event) => {
-        alert('Errorrrrr')
+
+    const dragEnd = function(event) {
+        this.classList.remove('hide')
+        // console.log('End', this)
     }
-}
-// const displayNotes = (notes) => {
-//     let note = notes[6];
-//     document.querySelector('.cart').innerHTML = `<a href="person.html"><p class="name">${note}</p></a>`
-// }
-const getAndDisplayNotes = (db) => {
-    let tx = db.transaction(['notes'], 'readonly');
-    let store = tx.objectStore('notes');
 
-    let req = store.openCursor();
-    let allNotes = [];
-    req.onsuccess = (event) => {
+    const dragOver = function(event) {
+        event.preventDefault()
+    }
 
-        let cursor = event.target.result;
-        if (cursor != null) {
-            allNotes.push(cursor.value);
-            cursor.continue();
+    const dragEnter = function(event) {
+        event.preventDefault()
+        this.classList.add('hovered')
+    }
+
+    const dragLeave  = function(event) {
+        this.classList.remove('hovered')
+        
+    }
+
+    const dragDrop  = function(event) {
+        // this.append(card)
+        // this.classList.remove('hovered')
+        // console.log('Drop')
+        const dragFlag = event.dataTransfer.getData("dragItem")
+        const dragItem = document.querySelector(`[data-item="${dragFlag}"]`)
+        if (String(this.dataset.zone) === String(dragFlag)) {
+            dragItem.classList.add('green')
+            console.log(this.dataset.zone,  dragFlag)
+            count+=1
         } else {
-            displayNotes(allNotes);
+            console.log(this.dataset.zone,  dragFlag)
+            dragItem.classList.add('red')
         }
-    }
-}
-// const displayNotes = (notes) => {
-//     let ter = `<a href="person.html"><p class="name">`
-//     for (let i = 0; i < 1; i++) {
-//         let note = notes[i];
-//         ter += note.Age + `</p></a>`
-//     }
-//     document.querySelector('.cart').innerHTML = ter
-// }
-    
+        dragItem.classList.add('many')
+        this.append(dragItem)
 
-dbReq.onsuccess = (event) => {
-    db = event.target.result
-    addStickyNote(db, "Jack", "russl", 34)
-    addStickyNote(db, "NIGGER", "russl", 34)
-    addStickyNote(db, "PRIORA", "russl", 34)
-    displayNotes(db)
-    // document.querySelector('.cart').innerHTML = `<a href="person.html"><p class="name">${notes].Name}</p></a>`
-    // document.querySelector('.cart').innerHTML = `<a href="person.html"><p class="name">${}</p></a>`
+        if (count == 3) {
+            document.querySelector('.btn-continue').classList.remove('hidden')
+        }
+    }   
+    const dragDrag  = function(event) {
+        // this.append(card)
+        this.classList.remove('hovered')
+        // console.log('Drag')
+    }
+
+    cells.forEach((cell) => {
+        cell.addEventListener('dragover', dragOver)
+        cell.addEventListener('dragenter', dragEnter)
+        cell.addEventListener('dragleave', dragLeave)
+        cell.addEventListener('drop', dragDrop)
+    })
+    cards.forEach((card) => {
+        card.addEventListener('dragstart', dragStart)
+        card.addEventListener('dragend', dragEnd)
+        card.addEventListener('drag', dragDrag)
+    })
+    
+    
 }
+
+
+
+DragAndDrop()
+
 
 
 
