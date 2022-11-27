@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a class="block-a" href="index.html">
+            <div class="logo just">
+                <img class="logo-og" src="src/img/logo4.png" alt="">
+            </div>
+        </a>
+        <p class="par-head">Drag&Drop</p>
+        <a href="person.html">
+            <div class="person just">
+                <img  class="logo-og avatar" src="src/img/avatar.png" alt="">
+            </div>
+        </a>
+    </nav>
+    <div class="main">
+        <h2 class="game_name hidden-h1" >Угадайте - какой факт мог бы принадлежать сотруднику Oggetto</h2>
+        <div class="tree hidden">
+            <div class="img-person">
+                <div class="pupa">
+                    <img class="img-img" src="src/img/nikitos.png" alt="">
+                </div>
+            </div>
+           
+            <div class="img-person">
+                <div class="pupa">
+                    <img class="img-img" src="src/img/rrr.png" alt="">
+                    
+                </div>
+               
+            </div>
+            <div class="img-person">
+                <div class="pupa">
+                    <img class="img-img" src="src/img/Cyber-Shaggy-4.webp" alt="">
+                </div>
+            </div>
+        </div>
+        <ul class="adds ">
+            <li class="add" data-zone="1"></li>
+            <li class="add" data-zone="2"></li>
+            <li class="add" data-zone="3"></li>
+        </ul>
+        <div class="facts hidden">
+            <div class="fact" draggable="true" data-item="3"><p class="factor">Любит кушать</p></div>
+            <div class="fact " draggable="true" data-item="1"><p class="factor">Увлекается программированием</p></div>
+            <div class="fact" draggable="true" data-item="2"><p class="factor"> Владеет магией</p></div>
+        </div>
+        <button class="btn-continue hidden">Следующий уровень</button>
+    </div>
+    
+
+
+    
+</body>
+<script src="main.js"></script>
+</html>

@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	},
+	{
+		"id": 2,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	},
+	{
+		"id": 3,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	},
+	{
+		"id": 4,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	},
+	{
+		"id": 5,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	},
+	{
+		"id": 6,
+		"name": "Sergei",
+        "family": "Fomenko",
+		"age": 17
+	}
+]
